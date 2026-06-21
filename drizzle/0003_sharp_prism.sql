@@ -1,0 +1,1 @@
+ALTER TABLE "reports" ADD COLUMN "assigned_at" timestamp with time zone;

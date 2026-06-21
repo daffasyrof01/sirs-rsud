@@ -1,0 +1,1 @@
+ALTER TABLE "reports" ADD COLUMN "spare_part" text DEFAULT '' NOT NULL;

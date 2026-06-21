@@ -1,0 +1,33 @@
+.next
+node_modules
+out
+*.log
+.env
+.env.local
+.env.*.local
+.DS_Store
+dist
+*.tsbuildinfo
+
+.vercel
+.env*.local
+.env.vercel
+.env.production.vercel
+android/app/google-services.json
+firebase-service-account*.json
+service-account*.json
+*-firebase-adminsdk-*.json
+
+# Local data and session artifacts
+cookies.txt
+sqlite.db
+sqlite.db-*
+public/uploads/
+
+# Android build and machine-specific files
+android/.gradle/
+android/**/build/
+android/local.properties
+*.jks
+*.keystore
+key.properties

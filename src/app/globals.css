@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-sans: "Plus Jakarta Sans", "Segoe UI", "Helvetica Neue", sans-serif;
+    --background: 205 40% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 202 87% 41%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 188 63% 96%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 160 84% 94%;
+    --accent-foreground: 166 67% 18%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 202 87% 41%;
+    --radius: 1rem;
+    --sidebar: 0 0% 100%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-border: 214 32% 91%;
+    --sidebar-accent: 210 40% 96%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --chart-1: 202 87% 41%;
+    --chart-2: 169 72% 35%;
+    --chart-3: 31 93% 53%;
+    --chart-4: 346 77% 49%;
+    --chart-5: 262 83% 58%;
+    --success: 160 84% 39%;
+    --success-foreground: 165 100% 97%;
+    --warning: 35 92% 50%;
+    --warning-foreground: 26 83% 14%;
+    --info: 202 87% 41%;
+    --info-foreground: 210 40% 98%;
+  }
+
+  .dark {
+    --background: 222 47% 8%;
+    --foreground: 210 40% 96%;
+    --card: 222 35% 12%;
+    --card-foreground: 210 40% 96%;
+    --popover: 222 35% 12%;
+    --popover-foreground: 210 40% 96%;
+    --primary: 199 89% 58%;
+    --primary-foreground: 222 47% 11%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 70%;
+    --accent: 168 76% 17%;
+    --accent-foreground: 169 80% 80%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 40% 96%;
+    --border: 217 30% 22%;
+    --input: 217 30% 22%;
+    --ring: 199 89% 58%;
+    --sidebar: 223 43% 10%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-border: 217 30% 22%;
+    --sidebar-accent: 217 33% 17%;
+    --sidebar-accent-foreground: 210 40% 96%;
+    --chart-1: 199 89% 58%;
+    --chart-2: 168 84% 49%;
+    --chart-3: 43 96% 56%;
+    --chart-4: 346 87% 65%;
+    --chart-5: 262 100% 70%;
+    --success: 160 84% 45%;
+    --success-foreground: 164 71% 12%;
+    --warning: 43 96% 56%;
+    --warning-foreground: 26 83% 14%;
+    --info: 199 89% 58%;
+    --info-foreground: 222 47% 11%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply min-h-screen bg-background text-foreground antialiased;
+    background-image:
+      radial-gradient(circle at top left, rgba(59, 130, 246, 0.08), transparent 28%),
+      radial-gradient(circle at top right, rgba(16, 185, 129, 0.08), transparent 22%);
+  }
+}

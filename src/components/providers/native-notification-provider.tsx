@@ -10,7 +10,7 @@ import { listNotifications } from "@/lib/services/notification-service";
 import type { NotificationItem } from "@/lib/types";
 
 const CHANNEL_ID = "sirs-report-updates";
-const POLL_INTERVAL_MS = 30_000;
+const POLL_INTERVAL_MS = 60_000;
 
 function getSeenStorageKey(userId: string) {
   return `sirs-native-notifications-seen:${userId}`;

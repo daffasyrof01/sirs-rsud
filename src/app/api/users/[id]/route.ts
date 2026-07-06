@@ -61,6 +61,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
           userId: id,
           newPassword: assertPasswordStrength(body.temporaryPassword),
         },
+        headers: request.headers,
       });
     }
 

@@ -26,6 +26,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
         userId: id,
         newPassword: temporaryPassword,
       },
+      headers: request.headers,
     });
 
     const account = await getUserAccountById(id);

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import { Analytics } from "@vercel/analytics/next";
+
 import { AuthProvider } from "@/components/providers/auth-provider";
 import { NativeNotificationProvider } from "@/components/providers/native-notification-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
@@ -30,6 +32,7 @@ export default async function RootLayout({
             <AppToaster />
           </AuthProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

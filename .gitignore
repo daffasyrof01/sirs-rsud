@@ -31,3 +31,7 @@ android/local.properties
 *.jks
 *.keystore
 key.properties
+
+# Migration exports contain hospital data and must stay outside Git
+SIPEDRAS-migrasi-*.zip
+migration-package-*/

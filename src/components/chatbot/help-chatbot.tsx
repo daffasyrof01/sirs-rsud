@@ -53,7 +53,7 @@ export function HelpChatbot({ role }: { role: Role }) {
       setResponding(true);
 
       try {
-        const reports = await listReports({});
+        const reports = await listReports();
         const reportAwareAnswer = getReportAwareChatbotAnswer({ question, role, reports });
         setMessages((current) => [
           ...current,

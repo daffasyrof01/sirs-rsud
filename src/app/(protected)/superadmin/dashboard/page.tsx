@@ -28,7 +28,7 @@ export default function SuperAdminDashboardPage() {
   React.useEffect(() => {
     if (!session) return;
 
-    Promise.all([listReports({ session }), listUsers(), listAuditLogs(8), listRegisteredDepartments()])
+    Promise.all([listReports(), listUsers(), listAuditLogs(8), listRegisteredDepartments()])
       .then(([reportData, userData, auditData, departmentData]) => {
         setReports(reportData);
         setUsers(userData);

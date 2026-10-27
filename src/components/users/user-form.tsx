@@ -99,6 +99,6 @@ export function mapUserToFormValues(user: UserAccount): UserFormValues {
     email: user.email,
     role: user.role,
     department: user.department,
-    temporaryPassword: user.password,
+    temporaryPassword: "",
   };
 }

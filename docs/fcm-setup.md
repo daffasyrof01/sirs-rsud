@@ -1,6 +1,8 @@
-# FCM Setup untuk SIRS RSUD
+# Konfigurasi notifikasi Android SIPEDRAS
 
 FCM dipakai agar notifikasi tetap bisa masuk ke Android walaupun aplikasi tidak sedang dibuka.
+
+Gunakan Node.js 22+, Java 21, dan Android SDK 36 untuk menyiapkan build Android.
 
 ## 1. Buat Firebase Project
 

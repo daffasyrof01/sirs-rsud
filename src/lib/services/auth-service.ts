@@ -86,25 +86,3 @@ export async function logout() {
 
   clearLegacyRoleCookie();
 }
-
-export async function requestPasswordReset(identifier: string) {
-  const response = await fetch("/api/forgot-password", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      identifier,
-    }),
-  });
-
-  const payload = (await response.json().catch(() => null)) as { message?: string; success?: boolean } | null;
-  if (!response.ok) {
-    throw new Error(payload?.message ?? "Akun tidak ditemukan.");
-  }
-
-  return {
-    success: Boolean(payload?.success),
-    message: payload?.message ?? "Tautan reset berhasil dikirim.",
-  };
-}

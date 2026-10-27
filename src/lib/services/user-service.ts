@@ -3,7 +3,7 @@
 import type { AccountStatus, Role, UserAccount } from "@/lib/types";
 
 async function parse<T>(response: Response) {
-  const payload = (await response.json().catch(() => null)) as { data?: T; message?: string; imported?: number } | null;
+  const payload = (await response.json().catch(() => null)) as { data?: T; message?: string } | null;
   if (!response.ok) {
     throw new Error(payload?.message ?? "Permintaan gagal.");
   }
@@ -98,13 +98,4 @@ export async function resetUserPassword(id: string) {
   });
   const payload = await parse<{ temporaryPassword: string }>(response);
   return payload.data!.temporaryPassword;
-}
-
-export async function importUsers() {
-  const response = await fetch("/api/users/import", {
-    method: "POST",
-    credentials: "include",
-  });
-  const payload = await parse<{ success: boolean }>(response);
-  return payload.imported ?? 0;
 }

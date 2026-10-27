@@ -37,7 +37,7 @@ export default function SuperAdminReportsPage() {
     if (!session) return;
 
     try {
-      const data = await listReports({ session, filters });
+      const data = await listReports({ filters });
       setReports(data);
     } catch {
       setReports([]);
@@ -92,7 +92,6 @@ export default function SuperAdminReportsPage() {
       await updateReportStatus({
         reportId: report.id,
         status,
-        actor: session,
         note,
       });
       await loadReports();

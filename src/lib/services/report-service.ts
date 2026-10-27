@@ -2,6 +2,7 @@
 
 import { upload } from "@vercel/blob/client";
 
+import { getCategoryLabel, getPriorityLabel, getStatusLabel } from "@/lib/constants/app";
 import { getSession } from "@/lib/services/auth-service";
 import { getDraftsStorage, setDraftsStorage } from "@/lib/storage";
 import { downloadTextFile, formatDateTimeForExport, localDateTimeInputToIso } from "@/lib/utils";
@@ -9,7 +10,6 @@ import type {
   DraftReportForm,
   Report,
   ReportFilterState,
-  ReportPriority,
   ReportStatus,
   Role,
   SessionUser,
@@ -144,9 +144,8 @@ function getDateFilterTime(value: string | undefined, boundary: "start" | "end")
 export async function listReports({
   filters,
 }: {
-  session?: SessionUser;
   filters?: Partial<ReportFilterState>;
-}) {
+} = {}) {
   const response = await fetch("/api/reports", {
     method: "GET",
     credentials: "include",
@@ -232,12 +231,10 @@ export async function createReport({
 export async function updateReportStatus({
   reportId,
   status,
-  actor,
   note,
 }: {
   reportId: string;
   status: ReportStatus;
-  actor?: SessionUser;
   note: string;
 }) {
   const response = await fetch(`/api/reports/${reportId}`, {
@@ -257,12 +254,10 @@ export async function updateReportStatus({
 
 export async function assignReport({
   reportId,
-  actor,
   assigneeName,
   note,
 }: {
   reportId: string;
-  actor?: SessionUser;
   assigneeName: string;
   note: string;
 }) {
@@ -304,11 +299,9 @@ export async function updateReportSparePart({
 
 export async function addReportComment({
   reportId,
-  actor,
   message,
 }: {
   reportId: string;
-  actor?: SessionUser;
   message: string;
 }) {
   const response = await fetch(`/api/reports/${reportId}/comments`, {
@@ -369,9 +362,9 @@ export async function exportReports({
       report.reporterName,
       report.reporterDepartment,
       report.locationLabel,
-      translateCategory(report.category),
-      translatePriority(report.priority),
-      translateStatus(report.status),
+      getCategoryLabel(report.category),
+      getPriorityLabel(report.priority),
+      getStatusLabel(report.status),
       formatDateTimeForExport(report.occurredAt),
       formatDateTimeForExport(report.createdAt),
       formatDateTimeForExport(getAssignmentTimestamp(report)),
@@ -484,7 +477,7 @@ function toPdfDocument(reports: Report[]) {
   const rows = reports.flatMap((report, index) => [
     `${index + 1}. ${report.reportNumber} - ${report.title}`,
     `   Pelapor: ${report.reporterName} | Departemen: ${report.reporterDepartment}`,
-    `   Lokasi: ${report.locationLabel} | Kategori: ${translateCategory(report.category)} | Prioritas: ${translatePriority(report.priority)} | Status: ${translateStatus(report.status)}`,
+    `   Lokasi: ${report.locationLabel} | Kategori: ${getCategoryLabel(report.category)} | Prioritas: ${getPriorityLabel(report.priority)} | Status: ${getStatusLabel(report.status)}`,
     `   Kejadian: ${formatDateTimeForExport(report.occurredAt)} | Kirim: ${formatDateTimeForExport(report.createdAt)} | Penugasan: ${formatDateTimeForExport(getAssignmentTimestamp(report))} | Selesai: ${formatDateTimeForExport(getStatusTimestamp(report, "resolved"))} | Spare Part: ${report.sparePart || "-"}`,
     "",
   ]);
@@ -621,7 +614,7 @@ export function getCategoryBreakdown(reports: Report[]) {
     map.set(report.category, (map.get(report.category) ?? 0) + 1);
   });
 
-  return Array.from(map.entries()).map(([category, value]) => ({ name: translateCategory(category as Report["category"]), category, value }));
+  return Array.from(map.entries()).map(([category, value]) => ({ name: getCategoryLabel(category as Report["category"]), category, value }));
 }
 
 export function getLocationBreakdown(reports: Report[]) {
@@ -642,51 +635,6 @@ export function getDepartmentBreakdown(reports: Report[]) {
   return Array.from(map.entries())
     .sort(([first], [second]) => first.localeCompare(second))
     .map(([department, total]) => ({ department, total }));
-}
-
-export function translateStatus(status: ReportStatus) {
-  switch (status) {
-    case "pending":
-      return "Pending";
-    case "in_progress":
-      return "Diproses";
-    case "resolved":
-      return "Selesai";
-    case "rejected":
-      return "Ditolak";
-  }
-}
-
-export function translatePriority(priority: ReportPriority) {
-  switch (priority) {
-    case "low":
-      return "Rendah";
-    case "medium":
-      return "Sedang";
-    case "high":
-      return "Tinggi";
-    case "emergency":
-      return "Darurat";
-  }
-}
-
-export function translateCategory(category: Report["category"]) {
-  switch (category) {
-    case "listrik":
-      return "Listrik";
-    case "plumbing":
-      return "Plumbing";
-    case "struktural":
-      return "Struktural";
-    case "peralatan_medis":
-      return "Peralatan Medis";
-    case "hvac":
-      return "HVAC";
-    case "it_jaringan":
-      return "IT/Jaringan";
-    case "lainnya":
-      return "Lainnya";
-  }
 }
 
 export function getUnreadAlertsCount(role: Role, reports: Report[]) {

@@ -66,7 +66,6 @@ export default function AdminReportDetailPage() {
         const updatedReport = await updateReportStatus({
           reportId: report.id,
           status,
-          actor: session,
           note,
         });
         setReport(updatedReport);
@@ -205,7 +204,6 @@ export default function AdminReportDetailPage() {
                 onClick={async () => {
                   await assignReport({
                     reportId: report.id,
-                    actor: session,
                     assigneeName: assignName,
                     note: assignmentNote,
                   });

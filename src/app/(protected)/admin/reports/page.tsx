@@ -35,7 +35,7 @@ export default function AdminReportsPage() {
   const loadReports = React.useCallback(async () => {
     if (!session) return;
     try {
-      const data = await listReports({ session, filters });
+      const data = await listReports({ filters });
       setReports(data);
     } catch {
       setReports([]);
@@ -87,7 +87,6 @@ export default function AdminReportsPage() {
       await updateReportStatus({
         reportId: report.id,
         status,
-        actor: session,
         note,
       });
       await loadReports();

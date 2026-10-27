@@ -22,7 +22,7 @@ export default function StaffDashboardPage() {
 
   React.useEffect(() => {
     if (!session) return;
-    Promise.all([listReports({ session }), listNotifications()])
+    Promise.all([listReports(), listNotifications()])
       .then(([nextReports, nextNotifications]) => {
         setReports(nextReports);
         setNotifications(nextNotifications);

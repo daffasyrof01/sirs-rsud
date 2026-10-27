@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Download, UserPlus } from "lucide-react";
+import { UserPlus } from "lucide-react";
 import { toast } from "sonner";
 
 import { PageHeader } from "@/components/layout/page-header";
@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { UserForm, type UserFormValues } from "@/components/users/user-form";
 import { UserTable } from "@/components/users/user-table";
-import { createUser, deleteUser, importUsers, listUsers, resetUserPassword, setUserStatus } from "@/lib/services/user-service";
+import { createUser, deleteUser, listUsers, resetUserPassword, setUserStatus } from "@/lib/services/user-service";
 import type { UserAccount } from "@/lib/types";
 
 export default function SuperAdminUsersPage() {
@@ -52,24 +52,9 @@ export default function SuperAdminUsersPage() {
     <div className="space-y-6">
       <PageHeader
         title="Manajemen Pengguna"
-        description="Kelola akun admin dan staff, ubah status akun, reset password, dan impor pengguna massal."
+        description="Kelola akun pengguna, ubah status akun, dan reset password."
         action={
           <div className="flex flex-wrap gap-3">
-            <Button
-              variant="outline"
-              onClick={async () => {
-                try {
-                  const count = await importUsers();
-                  refresh((value) => value + 1);
-                  toast.success(`${count} pengguna berhasil diimpor.`);
-                } catch (error) {
-                  toast.error(error instanceof Error ? error.message : "Impor pengguna gagal dijalankan.");
-                }
-              }}
-            >
-              <Download className="h-4 w-4" />
-              Impor CSV/Excel
-            </Button>
             <Button onClick={() => setCreateOpen(true)}>
               <UserPlus className="h-4 w-4" />
               Tambah Pengguna

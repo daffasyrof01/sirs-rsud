@@ -59,7 +59,6 @@ export default function SuperAdminReportDetailPage() {
         const updatedReport = await updateReportStatus({
           reportId: report.id,
           status,
-          actor: session,
           note,
         });
         setReport(updatedReport);

@@ -38,7 +38,7 @@ export default function AdminDashboardPage() {
 
   React.useEffect(() => {
     if (!session) return;
-    Promise.all([listReports({ session }), listRegisteredDepartments()])
+    Promise.all([listReports(), listRegisteredDepartments()])
       .then(([data, departments]) => {
         setReports(data);
         setRegisteredDepartments(departments);

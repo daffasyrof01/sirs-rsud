@@ -29,6 +29,7 @@ export const auth = betterAuth({
   }),
   emailAndPassword: {
     enabled: true,
+    disableSignUp: true,
   },
   session: {
     expiresIn: 60 * 60 * 24 * 30,
@@ -83,10 +84,10 @@ export const auth = betterAuth({
       : []),
     admin({
       defaultRole: "staff",
-      adminRoles: ["admin", "superadmin"],
+      adminRoles: ["superadmin"],
       roles: {
         staff: defaultRoles.user,
-        admin: defaultRoles.admin,
+        admin: defaultRoles.user,
         superadmin: defaultRoles.admin,
       },
       bannedUserMessage: "Akun Anda sedang nonaktif. Hubungi Super Admin.",

@@ -35,7 +35,7 @@ export default function StaffReportsPage() {
 
   React.useEffect(() => {
     if (!session) return;
-    listReports({ session, filters })
+    listReports({ filters })
       .then((data) => setReports(data))
       .catch(() => setReports([]));
   }, [filters, session]);

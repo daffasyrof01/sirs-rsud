@@ -40,7 +40,6 @@ export function mapUserRowToUserAccount(row: typeof user.$inferSelect): UserAcco
     name: row.name,
     email: row.email,
     username: row.username ?? row.email.split("@")[0],
-    password: "",
     role: ((row.role as Role | null) ?? "staff") as Role,
     department: row.department ?? "Umum",
     status: row.banned ? "inactive" : "active",

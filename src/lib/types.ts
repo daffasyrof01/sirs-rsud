@@ -30,7 +30,6 @@ export interface UserAccount {
   name: string;
   email: string;
   username: string;
-  password: string;
   role: Role;
   department: string;
   status: AccountStatus;

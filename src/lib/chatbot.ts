@@ -1,5 +1,5 @@
-import { getCategoryLabel } from "@/lib/constants/app";
-import { getReportSummary, translatePriority, translateStatus } from "@/lib/services/report-service";
+import { getCategoryLabel, getPriorityLabel, getStatusLabel } from "@/lib/constants/app";
+import { getReportSummary } from "@/lib/services/report-service";
 import { formatDate } from "@/lib/utils";
 import type { Report, Role } from "@/lib/types";
 
@@ -91,7 +91,7 @@ const SUPERADMIN_RULES: ChatRule[] = [
   {
     keywords: ["user", "pengguna", "akun", "reset password", "nonaktif", "aktifkan"],
     answer:
-      "Buka Manajemen Pengguna untuk membuat akun, mengedit data, mengaktifkan atau menonaktifkan user, reset password, impor pengguna, atau menghapus akun yang tidak diperlukan.",
+      "Buka Manajemen Pengguna untuk membuat akun, mengedit data, mengaktifkan atau menonaktifkan pengguna, reset password, atau menghapus akun yang tidak diperlukan.",
     roles: ["superadmin"],
   },
   {
@@ -159,7 +159,7 @@ export function getReportAwareChatbotAnswer({
     if (urgentReports.length === 0) return `Saat ini tidak ada ${scope} dengan prioritas tinggi atau darurat.`;
 
     return `Ada ${summary.urgent} ${scope} dengan prioritas tinggi/darurat. Teratas: ${urgentReports
-      .map((report) => `${report.reportNumber} - ${report.title} (${translatePriority(report.priority)}, ${translateStatus(report.status)})`)
+      .map((report) => `${report.reportNumber} - ${report.title} (${getPriorityLabel(report.priority)}, ${getStatusLabel(report.status)})`)
       .join("; ")}.`;
   }
 
@@ -168,7 +168,7 @@ export function getReportAwareChatbotAnswer({
     if (latestReports.length === 0) return `Belum ada ${scope}.`;
 
     return `Laporan terbaru: ${latestReports
-      .map((report) => `${report.reportNumber} - ${report.title}, ${getCategoryLabel(report.category)}, ${translateStatus(report.status)}, ${formatDate(report.createdAt)}`)
+      .map((report) => `${report.reportNumber} - ${report.title}, ${getCategoryLabel(report.category)}, ${getStatusLabel(report.status)}, ${formatDate(report.createdAt)}`)
       .join("; ")}.`;
   }
 

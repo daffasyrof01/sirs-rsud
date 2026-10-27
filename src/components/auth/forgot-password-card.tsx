@@ -1,34 +1,13 @@
 "use client";
 
-import * as React from "react";
 import Link from "next/link";
-import { MailCheck } from "lucide-react";
-import { toast } from "sonner";
+import { KeyRound } from "lucide-react";
 
 import { ThemeToggle } from "@/components/layout/theme-toggle";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { requestPasswordReset } from "@/lib/services/auth-service";
 
 export function ForgotPasswordCard() {
-  const [identifier, setIdentifier] = React.useState("");
-  const [submitting, setSubmitting] = React.useState(false);
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setSubmitting(true);
-    try {
-      const result = await requestPasswordReset(identifier);
-      toast.success(result.message);
-    } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Permintaan reset gagal.");
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
   return (
     <div className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_14%_16%,rgba(20,184,166,0.22),transparent_32%),radial-gradient(circle_at_86%_20%,rgba(59,130,246,0.22),transparent_30%),linear-gradient(145deg,hsl(var(--background)),hsl(var(--muted)))] px-6 py-10">
       <div className="pointer-events-none absolute left-[-8rem] top-[-7rem] h-80 w-80 rounded-full bg-emerald-400/20 blur-3xl" />
@@ -38,30 +17,25 @@ export function ForgotPasswordCard() {
           <CardHeader>
             <div className="mb-4 flex items-center justify-between">
               <div className="rounded-2xl bg-primary/10 p-3 text-primary">
-                <MailCheck className="h-6 w-6" />
+                <KeyRound className="h-6 w-6" />
               </div>
               <ThemeToggle />
             </div>
             <CardTitle>Lupa Password</CardTitle>
             <CardDescription>
-              Masukkan email atau username akun Anda. Permintaan reset akan diteruskan sesuai kebijakan sistem yang aktif.
+              Hubungi Super Admin rumah sakit untuk mereset password akun Anda.
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form className="space-y-5" onSubmit={handleSubmit}>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email atau Username</Label>
-                <Input id="email" value={identifier} onChange={(event) => setIdentifier(event.target.value)} />
-              </div>
-              <Button type="submit" className="w-full" disabled={submitting}>
-                {submitting ? "Mengirim..." : "Kirim Tautan Reset"}
-              </Button>
-              <div className="text-center text-sm text-muted-foreground">
-                <Link href="/" className="text-primary hover:underline">
-                  Kembali ke beranda
-                </Link>
-              </div>
-            </form>
+            <div className="space-y-5">
+              <p className="text-sm text-muted-foreground">
+                Siapkan nama, unit kerja, serta username atau email yang terdaftar agar Super Admin dapat menemukan akun Anda.
+                Password sementara diberikan langsung oleh Super Admin setelah permintaan Anda diverifikasi.
+              </p>
+              <Link href="/" className={buttonVariants({ className: "w-full" })}>
+                Kembali ke halaman login
+              </Link>
+            </div>
           </CardContent>
         </Card>
       </div>
